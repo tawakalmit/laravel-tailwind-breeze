@@ -1,15 +1,26 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Card CRUD') }}
-        </h2>
+        @if (session('status'))
+        <div class="alert alert-success">
+            <p class="text-center">{{ session('status') }}</p>
+        </div>
+    @endif
     </x-slot>
 
     <section class="w-10/12 flex justify-center mt-20 mb-20 mx-auto">
-        <form action="" class="flex flex-col w-[20rem] bg-white rounded-3xl">
-            <input type="text" id="name" name="name" placeholder="Name" class="rounded-2xl border-0 mb-5 w-10/12 mx-auto bg-[rgba(0,0,0,0)] mt-5" >
-            <input type="text" id="name" name="name" placeholder="Description" class="rounded-2xl border-0 mb-5 w-10/12 mx-auto bg-[rgba(0,0,0,0)]" >
-            <button class="btn btn-primary w-10/12 mx-auto mb-5" type="submit">Submit</button>
+        <form action="" enctype="multipart/form-data" method="post" class="flex flex-col w-[40rem] bg-white rounded-3xl myshadow">
+            @csrf
+            <div class="flex w-11/12 mt-10 mx-auto justify-between mb-5">
+                <div class="w-96 flex flex-col w-fit">
+                    <input type="text" id="name" name="name" placeholder="Name" class="rounded-2xl border-0 mb-5 w-full mx-auto bg-[rgba(0,0,0,0)] mt-5" >
+                    <input type="text" id="description" name="description" placeholder="Description" class="rounded-2xl border-0 mb-5 w-full mx-auto bg-[rgba(0,0,0,0)]" >
+                    <input type="file" id="image" name="image" class="ml-3 w-[6.3rem] mb-5">
+                </div>
+                <div class="w-96 flex justify-center items-center">
+                    <img id="preview-image-before-upload" src="notfound.webp" alt="preview image" class="h-[10rem]">
+                </div>
+            </div>
+            <button class="w-10/12 btn btn-primary mx-auto mb-5" type="submit">Submit</button>
         </form>
     </section>
 
@@ -20,31 +31,21 @@
                   <!-- head -->
                   <thead>
                     <tr>
-                      <th>
-                        <label>
-                          <input type="checkbox" class="checkbox" />
-                        </label>
-                      </th>
                       <th>Name</th>
                       <th>description</th>
                       <th>Created at</th>
-                      <th></th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     <!-- row 1 -->
                     @foreach ($crud as $item)
                     <tr>
-                        <th>
-                          <label>
-                            <input type="checkbox" class="checkbox" />
-                          </label>
-                        </th>
                         <td>
                           <div class="flex items-center space-x-3">
                             <div class="avatar">
                               <div class="mask mask-squircle w-12 h-12">
-                                <img src="notfound.webp" alt="" />
+                                <img src="storage/image/{{ $item->image }}" alt="pic" />
                               </div>
                             </div>
                             <div>
@@ -55,10 +56,16 @@
                         <td>
                             <p>{{ $item->description }}</p>
                         </td>
-                        <td>Purple</td>
+                        <td>{{ $item->created_at }}</td>
                         <th class="flex flex-col">
-                          <button class="btn btn-ghost btn-xs">Edit</button>
-                          <button class="btn btn-ghost btn-xs">Delete</button>
+                          <div><form action="crud/{{ $item->id }}/edit"><button class="btn btn-ghost btn-xs" type="submit">Edit</button></form></div>
+                          <div>
+                            <form action="crud/{{ $item->id }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button class="btn btn-ghost btn-xs" type="submit">Delete</button>
+                            </form>
+                          </div>
                         </th>
                       </tr>
                     @endforeach
