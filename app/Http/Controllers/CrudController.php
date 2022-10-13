@@ -16,6 +16,13 @@ class CrudController extends Controller
 
     public function store(Request $request) {
 
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'image' => 'required|image',
+            'price' => 'required'
+        ]);
+
         $file = $request->file('image');
         $filename = $file->getClientOriginalName();
         $file->storeAs('image', $filename);
@@ -25,6 +32,7 @@ class CrudController extends Controller
         $crud->name = $request->name;
         $crud->description = $request->description;
         $crud->image = $request->file('image')->getClientOriginalName();
+        $crud->price = $request->price;
 
         $crud->save();
 
@@ -37,6 +45,7 @@ class CrudController extends Controller
 
         $crud->name = $request->name;
         $crud->description = $request->description;
+        $crud->price = $request->price;
         if(file_exists($request->file('image'))){
             $file = $request->file('image');
             $filename = $file->getClientOriginalName();

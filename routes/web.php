@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CrudController;
+use App\Http\Controllers\BuyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,10 @@ Route::post('crud', [CrudController::class, 'store'])->name('crud.store');
 Route::get('crud/{id}/edit', [CrudController::class, 'edit'])->name('crud.edit');
 Route::put('crud/{id}', [CrudController::class, 'update'])->name('crud.update');
 Route::delete('crud/{id}', [CrudController::class, 'destroy'])->name('crud.destroy');
+
+Route::get('buy/{id}', [BuyController::class, 'index'])
+    ->name('buy.index')
+    ->middleware(['auth', 'verified']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

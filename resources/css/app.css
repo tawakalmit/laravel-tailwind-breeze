@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    background-color: #ecf0f1;
+}
+
 body {
     font-family: 'Quicksand', sans-serif;
 }
