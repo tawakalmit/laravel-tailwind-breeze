@@ -17,6 +17,7 @@
                     <input type="text" id="name" name="name" placeholder="Name" class="rounded-2xl border-0 mb-5 w-[40rem] mx-auto bg-[rgba(0,0,0,0)]" value="{{ $crud->name }}" >
                     <label for="description" class="font-bold text-xl">Description</label>
                     <input type="text" id="description" name="description" placeholder="Description" class="rounded-2xl border-0 mb-5 w-full mx-auto bg-[rgba(0,0,0,0)]" value="{{ $crud->description }}" >
+                    <input type="number" id="price" name="price" placeholder="0" class="rounded-2xl border-0 mb-5 w-full mx-auto bg-[rgba(0,0,0,0)]" value="{{ $crud->price }}" >
                     <input type="file" id="image" name="image" class="ml-3 w-[6.3rem] mb-5">
                 </div>
                 <div class="w-[40rem] flex justify-around">
