@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CrudController;
 use App\Http\Controllers\BuyController;
 use App\Http\Controllers\SampleController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,9 +28,13 @@ Route::delete('crud/{id}', [CrudController::class, 'destroy'])->name('crud.destr
 
 Route::get('sample', [SampleController::class, 'index'])->name('sample.index');
 
-Route::get('buy/{id}', [BuyController::class, 'index'])
+Route::get('profile', [ProfileController::class, 'index'])
+    ->name('profile.index')
+    ->middleware('auth', 'verified');
+
+Route::get('buy/{id}', [BuyController::class, 'buy'])
     ->name('buy.index')
-    ->middleware(['auth', 'verified']);
+    ->middleware('auth', 'verified');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

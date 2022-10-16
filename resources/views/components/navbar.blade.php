@@ -7,7 +7,18 @@
             <a href="{{ route('register') }}" class="text-white hover:text-[#3498db]">Register</a>
         </div>
         @else
-        <p class="text-white">{{ Auth::user()->name }}</p>
+        <div class="dropdown dropdown-end">
+            <label tabindex="0" class="btn btn-ghost text-white">{{ Auth::user()->name }}</label>
+            <ul tabindex="0" class="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-4">
+              <li><a href="{{ route('profile.index') }}">Profile</a></li> 
+              <li>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit">Logout</button>
+                </form>
+              </li>
+            </ul>
+        </div>
         @endif
     </div>
 </nav>
