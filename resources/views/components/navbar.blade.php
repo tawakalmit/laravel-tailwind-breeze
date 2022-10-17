@@ -8,13 +8,13 @@
         </div>
         @else
         <div class="dropdown dropdown-end">
-            <label tabindex="0" class="btn btn-ghost text-white">{{ Auth::user()->name }}</label>
+            <label tabindex="0" class="btn btn-ghost text-white">{{ Auth::user()->name }}<x-icons.chevron-down /></label>
             <ul tabindex="0" class="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-4">
               <li><a href="{{ route('profile.index') }}">Profile</a></li> 
               <li>
                 <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit">Logout</button>
+                    @csrf   
+                            <button type="submit" class="text-left w-full h-full">Logout</button>
                 </form>
               </li>
             </ul>

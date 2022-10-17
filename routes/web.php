@@ -32,7 +32,7 @@ Route::get('profile', [ProfileController::class, 'index'])
     ->name('profile.index')
     ->middleware('auth', 'verified');
 
-Route::get('buy/{id}', [BuyController::class, 'buy'])
+Route::get('buy/{id}', [BuyController::class, 'index'])
     ->name('buy.index')
     ->middleware('auth', 'verified');
 
