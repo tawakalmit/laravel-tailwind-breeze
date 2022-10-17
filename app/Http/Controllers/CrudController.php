@@ -11,11 +11,17 @@ use App\Http\Controllers\Controller;
 class CrudController extends Controller
 {
     public function index() {
-        $search = Home::latest();
+        
 
-        $crud = Home::all();
-        $crud_category = Category::get();
-        return view('crud', compact('crud', 'crud_category'));
+        if(request('search')){
+            $crud = Home::where('name', 'like', '%'. request('search') . '%' )->get();
+            $crud_category = Category::get();
+            return view('crud', compact('crud', 'crud_category'));
+        } else {
+            $crud = Home::all();
+            $crud_category = Category::get();
+            return view('crud', compact('crud', 'crud_category'));
+        }
     }
 
     public function store(Request $request) {

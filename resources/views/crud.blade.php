@@ -43,6 +43,27 @@
               <input type="text" placeholder="Search" class="input input-bordered w-full max-w-xs" name="search" id="search" />
               <button type="submit" class="btn">Search</button>
             </form>
+            {{-- <div class="w-11/12 h-screen mx-auto bg-[#ecf0f1] flex flex-col">
+              @foreach ($crud as $item)
+              <x-dataku>
+                <x-slot name="image">{{ $item->image }}</x-slot>
+                <x-slot name="name">{{ $item->name }}</x-slot>
+                <x-slot name="description">{{ $item->description }}</x-slot>
+                <x-slot name="price">{{ number_format($item->price, 2,',','.') }}</x-slot>
+                <x-slot name="category">{{ $item->category->name }}</x-slot>
+                <x-slot name="action">
+                  <div><form action="crud/{{ $item->id }}/edit"><button class="btn btn-ghost btn-xs" type="submit"><x-icons.pencil-alt /></button></form></div>
+                          <div class="w-fit">
+                            <form action="crud/{{ $item->id }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button class="btn btn-ghost btn-xs text-[#e74c3c]" type="submit"><x-icons.trash/></button>
+                            </form>
+                          </div>
+                </x-slot>
+              </x-dataku>
+              @endforeach
+            </div> --}}
             <div class="overflow-x-auto w-11/12 mx-auto myshadow">
                 <table class="table w-full">
                   <!-- head -->
