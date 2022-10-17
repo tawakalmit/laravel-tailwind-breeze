@@ -64,12 +64,12 @@
                         </td>
                         <td>{{ number_format($item->price, 2,',','.') }}</td>
                         <th class="flex flex-col">
-                          <div><form action="crud/{{ $item->id }}/edit"><button class="btn btn-ghost btn-xs" type="submit">Edit</button></form></div>
-                          <div>
+                          <div><form action="crud/{{ $item->id }}/edit"><button class="btn btn-ghost btn-xs" type="submit"><x-icons.pencil-alt /></button></form></div>
+                          <div class="w-fit">
                             <form action="crud/{{ $item->id }}" method="post">
                             @csrf
                             @method('delete')
-                            <button class="btn btn-ghost btn-xs" type="submit">Delete</button>
+                            <button class="btn btn-ghost btn-xs text-[#e74c3c]" type="submit"><x-icons.trash/></button>
                             </form>
                           </div>
                         </th>
