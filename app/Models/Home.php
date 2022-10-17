@@ -9,4 +9,9 @@ class Home extends Model
 {
     use HasFactory;
     protected $table = 'cardcontainer';
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

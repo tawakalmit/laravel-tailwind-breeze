@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Home;
+use App\Models\Category;
 use App\Http\Controllers\Controller;
 
 class CrudController extends Controller
 {
     public function index() {
+        $search = Home::latest();
+
         $crud = Home::all();
-        return view('crud', compact('crud'));
+        $crud_category = Category::get();
+        return view('crud', compact('crud', 'crud_category'));
     }
 
     public function store(Request $request) {
@@ -20,19 +24,23 @@ class CrudController extends Controller
             'name' => 'required',
             'description' => 'required',
             'image' => 'required|image',
-            'price' => 'required'
+            'price' => 'required',
+            'category' => 'required'
         ]);
 
         $file = $request->file('image');
         $filename = $file->getClientOriginalName();
         $file->storeAs('image', $filename);
 
+        
         $crud = new Home;
 
         $crud->name = $request->name;
         $crud->description = $request->description;
         $crud->image = $request->file('image')->getClientOriginalName();
         $crud->price = $request->price;
+        $getId = Category::where('name', $request->category)->first();
+        $crud->category_id = $getId->id;
 
         $crud->save();
 
@@ -46,6 +54,8 @@ class CrudController extends Controller
         $crud->name = $request->name;
         $crud->description = $request->description;
         $crud->price = $request->price;
+        $getId = Category::where('name', $request->category)->first();
+        $crud->category_id = $getId->id;
         if(file_exists($request->file('image'))){
             $file = $request->file('image');
             $filename = $file->getClientOriginalName();
@@ -67,6 +77,7 @@ class CrudController extends Controller
 
     public function edit($id) {
         $crud = Home::find($id);
-        return view('crudedit', compact('crud'));
+        $crud_category = Category::get();
+        return view('crudedit', compact('crud', 'crud_category'));
     }
 }

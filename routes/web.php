@@ -6,6 +6,7 @@ use App\Http\Controllers\CrudController;
 use App\Http\Controllers\BuyController;
 use App\Http\Controllers\SampleController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,8 @@ Route::post('crud', [CrudController::class, 'store'])->name('crud.store');
 Route::get('crud/{id}/edit', [CrudController::class, 'edit'])->name('crud.edit');
 Route::put('crud/{id}', [CrudController::class, 'update'])->name('crud.update');
 Route::delete('crud/{id}', [CrudController::class, 'destroy'])->name('crud.destroy');
+
+Route::get('category/{category_id}', [CategoryController::class, 'index'])->name('category.index');
 
 Route::get('sample', [SampleController::class, 'index'])->name('sample.index');
 
