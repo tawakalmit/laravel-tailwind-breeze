@@ -10,6 +10,7 @@
         <div class="dropdown dropdown-end">
             <label tabindex="0" class="btn btn-ghost text-white">{{ Auth::user()->name }}<x-icons.chevron-down /></label>
             <ul tabindex="0" class="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-4">
+              <li><a href="{{ route('dashboard') }}">Dashboard</a></li> 
               <li><a href="{{ route('profile.index') }}">Profile</a></li> 
               <li>
                 <form method="POST" action="{{ route('logout') }}">

@@ -21,6 +21,13 @@
                     @error('price') <p class="text-[#e74c3c] ml-3">{{ $message }}</p> @enderror
                     <input type="file" id="image" name="image" class="ml-3 w-[6.3rem] mb-5">
                     @error('image') <p class="text-[#e74c3c] ml-3">{{ $message }}</p> @enderror
+                    <select class="select w-full max-w-xs" id="category" name="category">
+                      <option disabled selected>Choose Category</option>
+                      @foreach($crud_category as $select)
+                      <option>{{ $select->name }}</option>
+                      @endforeach
+                    </select>
+                    @error('category') <p class="text-[#e74c3c] ml-3">{{ $message }}</p> @enderror
                 </div>
                 <div class="w-96 flex justify-center items-center">
                     <img id="preview-image-before-upload" src="notfound.webp" alt="preview image" class="h-[10rem]">
@@ -32,6 +39,10 @@
 
     <section class="pb-20">
         <div>
+            <form class="w-11/12 mx-auto mb-5">
+              <input type="text" placeholder="Search" class="input input-bordered w-full max-w-xs" name="search" id="search" />
+              <button type="submit" class="btn">Search</button>
+            </form>
             <div class="overflow-x-auto w-11/12 mx-auto myshadow">
                 <table class="table w-full">
                   <!-- head -->
@@ -40,6 +51,7 @@
                       <th>Name</th>
                       <th>description</th>
                       <th>Price</th>
+                      <th>Category</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
@@ -63,6 +75,7 @@
                             <p>{{ $item->description }}</p>
                         </td>
                         <td>{{ number_format($item->price, 2,',','.') }}</td>
+                        <td>{{ $item->category->name }}</td>
                         <th class="flex flex-col">
                           <div><form action="crud/{{ $item->id }}/edit"><button class="btn btn-ghost btn-xs" type="submit"><x-icons.pencil-alt /></button></form></div>
                           <div class="w-fit">
