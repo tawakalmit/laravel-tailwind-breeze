@@ -1,15 +1,9 @@
-<x-app-layout>
-    <x-slot name="header">
-       
-    </x-slot>
-    @if (session('status'))
-    <div class="alert alert-success">
-        <p class="text-center">{{ session('status') }}</p>
-    </div>
-    @endif
+<x-main>
+    <x-slot name="title">CRUD</x-slot>
+    <x-slot name="content">
+      
+    <section class="pb-20 mt-20">
 
-    <section class="pb-20 mt-10">
-        
             <div class="w-11/12 mx-auto mb-5 flex justify-between">
               <label for="my-modal" class="btn btn-accent modal-button text-white">Add New Item</label>
               <form class="flex">
@@ -17,11 +11,17 @@
               <button type="submit" class="btn ml-2">Search</button>
               </form>
             </div>
+
+            @if (session('status'))
+            <div class="w-11/12 mx-auto alert mb-5 alert-success">
+                <p class="text-center text-white">{{ session('status') }}</p>
+            </div>
+            @endif
             
             <!-- Pop Up Modal Taro sini -->
             <input type="checkbox" id="my-modal" class="modal-toggle" />
             <div class="modal">
-                <form action="" enctype="multipart/form-data" method="post" class="flex flex-col w-[40rem] bg-white rounded-3xl myshadow">
+                <form action="/admin/crud" enctype="multipart/form-data" method="post" class="flex flex-col w-[40rem] bg-white rounded-3xl myshadow">
                   @csrf
                   <div class="flex w-11/12 mt-10 mx-auto justify-between mb-5">
                     <div class="w-96 flex flex-col w-fit">
@@ -50,7 +50,7 @@
                 </form>                  
             </div>
 
-            <div class="overflow-x-auto w-11/12 mx-auto myshadow">
+            <div class="overflow-x-auto z-10 w-11/12 mx-auto myshadow">
                 <table class="table w-full">
                   <!-- head -->
                   <thead>
@@ -84,9 +84,9 @@
                         <td>{{ number_format($item->price, 2,',','.') }}</td>
                         <td>{{ $item->category->name }}</td>
                         <th class="flex flex-col">
-                          <div><form action="crud/{{ $item->id }}/edit"><button class="btn btn-ghost btn-xs" type="submit"><x-icons.pencil-alt /></button></form></div>
+                          <div><form action="/admin/crud/{{ $item->id }}/edit"><button class="btn btn-ghost btn-xs" type="submit"><x-icons.pencil-alt /></button></form></div>
                           <div class="w-fit">
-                            <form action="crud/{{ $item->id }}" method="post">
+                            <form action="/admin/crud/{{ $item->id }}" method="post">
                             @csrf
                             @method('delete')
                             <button class="btn btn-ghost btn-xs text-[#e74c3c]" type="submit"><x-icons.trash/></button>
@@ -99,7 +99,6 @@
                 </table>
               </div>
     </section>
+    </x-slot>
     
-
-    
-</x-app-layout>
+</x-main>

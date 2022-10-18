@@ -1,14 +1,9 @@
-<x-app-layout>
-    <x-slot name="header">
-        @if (session('status'))
-        <div class="alert alert-success">
-            <p class="text-center">{{ session('status') }}</p>
-        </div>
-        @endif
-    </x-slot>
+<x-main>
+  <x-slot name="title">Admin Login</x-slot>
+  <x-slot name="content">
 
     <section class="w-10/12 flex justify-center mt-20 mb-20 mx-auto">
-        <form action="/crud/{{ $crud->id }}" enctype="multipart/form-data" method="post" class="flex flex-col w-full bg-white rounded-3xl myshadow">
+        <form action="/admin/crud/{{ $crud->id }}" enctype="multipart/form-data" method="post" class="flex flex-col w-full bg-white rounded-3xl myshadow">
             @csrf
             @method('put')
             <div class="flex w-11/12 mt-10 mx-auto justify-between mb-5">
@@ -38,4 +33,7 @@
             <button class="w-10/12 btn btn-primary mx-auto mb-5" type="submit">Save Changes</button>
         </form>
     </section>
-</x-app-layout>
+
+  </x-slot>
+    
+</x-main>
