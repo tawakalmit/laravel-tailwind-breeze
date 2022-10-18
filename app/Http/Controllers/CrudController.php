@@ -61,7 +61,15 @@ class CrudController extends Controller
         $crud->description = $request->description;
         $crud->price = $request->price;
         $getId = Category::where('name', $request->category)->first();
-        $crud->category_id = $getId->id;
+        
+
+        if($request->category == null) {
+            $default_category = Home::where('id', $id)->first();
+            $crud->category_id = $default_category->category_id;
+        } else {
+            $crud->category_id = $getId->id;
+        }
+        
         if(file_exists($request->file('image'))){
             $file = $request->file('image');
             $filename = $file->getClientOriginalName();
