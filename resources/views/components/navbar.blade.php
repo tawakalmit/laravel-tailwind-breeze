@@ -1,4 +1,4 @@
-<nav class="fixed top-0 w-full h-14 bg-[#2c3e50] myshadow">
+<nav class="fixed z-50 top-0 w-full h-14 bg-[#2c3e50] myshadow">
     <div class="flex items-center justify-between w-10/12 mx-auto h-14">
         <a href="/" class=" cursor-pointer text-white text-2xl">Sofaque</a>
         @if(!Auth::check())

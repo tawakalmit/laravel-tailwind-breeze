@@ -1,14 +1,9 @@
-<x-app-layout>
-    <x-slot name="header">
-        @if (session('status'))
-        <div class="alert alert-success">
-            <p class="text-center">{{ session('status') }}</p>
-        </div>
-        @endif
-    </x-slot>
+<x-main>
+  <x-slot name="title">Admin Login</x-slot>
+  <x-slot name="content">
 
     <section class="w-10/12 flex justify-center mt-20 mb-20 mx-auto">
-        <form action="/crud/{{ $crud->id }}" enctype="multipart/form-data" method="post" class="flex flex-col w-full bg-white rounded-3xl myshadow">
+        <form action="/admin/crud/{{ $crud->id }}" enctype="multipart/form-data" method="post" class="flex flex-col w-full bg-white rounded-3xl myshadow">
             @csrf
             @method('put')
             <div class="flex w-11/12 mt-10 mx-auto justify-between mb-5">
@@ -19,7 +14,7 @@
                     <input type="text" id="description" name="description" placeholder="Description" class="rounded-2xl border-0 mb-5 w-full mx-auto bg-[rgba(0,0,0,0)]" value="{{ $crud->description }}" >
                     <input type="number" id="price" name="price" placeholder="0" class="rounded-2xl border-0 mb-5 w-full mx-auto bg-[rgba(0,0,0,0)]" value="{{ $crud->price }}" >
                     <input type="file" id="image" name="image" class="ml-3 w-[6.3rem] mb-5">
-                    <select class="select w-full max-w-xs" id="category" name="category">
+                    <select class="select w-full max-w-xs" id="category" name="category" value="{{ $crud->category->name }}">
                         <option disabled selected>{{ $crud->category->name }}</option>
                         @foreach($crud_category as $select)
                         <option>{{ $select->name }}</option>
@@ -38,4 +33,7 @@
             <button class="w-10/12 btn btn-primary mx-auto mb-5" type="submit">Save Changes</button>
         </form>
     </section>
-</x-app-layout>
+
+  </x-slot>
+    
+</x-main>
